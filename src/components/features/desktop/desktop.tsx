@@ -1,6 +1,10 @@
 import React from 'react';
-import './styles/index.scss';
+import styled from 'styled-components';
+
+const DesktopWrapper = styled.div`
+  width: 100%;
+`;
 
 export const Desktop = () => {
-    return <div className="desktop">Desktop</div>;
+  return <DesktopWrapper>Desktop</DesktopWrapper>;
 };

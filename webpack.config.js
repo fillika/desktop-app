@@ -5,49 +5,50 @@ const miniCss = require('mini-css-extract-plugin');
 let mode = process.env.NODE_ENV === 'production' ? 'production' : 'development';
 
 module.exports = {
-    entry: path.resolve(__dirname, 'src', 'index.tsx'),
-    output: {
-        path: path.resolve(__dirname, 'dist'),
-        clean: true, // Очищает директорию dist перед обновлением бандла
+  entry: path.resolve(__dirname, 'src', 'index.tsx'),
+  output: {
+    path: path.resolve(__dirname, 'dist'),
+    clean: true, // Очищает директорию dist перед обновлением бандла
+  },
+  devtool: 'source-map',
+  devServer: {
+    open: true,
+    compress: true,
+    hot: true,
+    port: 8080,
+  },
+  mode,
+  resolve: {
+    extensions: ['.tsx', '.ts', '.js'],
+    alias: {
+      '@components': path.resolve(__dirname, 'src', 'components'),
+      '@features': path.resolve(__dirname, 'src', 'components', 'features'),
     },
-    devtool: 'source-map',
-    devServer: {
-        open: true,
-        compress: true,
-        hot: true,
-        port: 8080,
-    },
-    mode,
-    resolve: {
-        extensions: ['.tsx', '.ts', '.js'],
-        alias: {
-            '@features': path.resolve(__dirname, 'src', 'components', 'features'),
-        },
-    },
-    module: {
-        rules: [
-            {
-                test: /\.jsx?$/,
-                exclude: /node_modules/,
-                use: 'babel-loader',
-            },
-            {
-                test: /\.tsx?$/,
-                use: 'ts-loader',
-                exclude: /node_modules/,
-            },
-            {
-                test: /\.((s[ac]|s)ss)|(.css)$/i,
-                use: [miniCss.loader, 'css-loader', 'sass-loader', 'postcss-loader'],
-            },
-        ],
-    },
-    plugins: [
-        new HtmlWebpackPlugin({
-            template: path.resolve(__dirname, 'src', 'index.html'),
-        }),
-        new miniCss({
-            filename: 'style.css',
-        }),
+  },
+  module: {
+    rules: [
+      {
+        test: /\.jsx?$/,
+        exclude: /node_modules/,
+        use: 'babel-loader',
+      },
+      {
+        test: /\.tsx?$/,
+        use: 'ts-loader',
+        exclude: /node_modules/,
+      },
+      {
+        test: /\.((s[ac]|s)ss)|(.css)$/i,
+        use: [miniCss.loader, 'css-loader', 'sass-loader', 'postcss-loader'],
+      },
     ],
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: path.resolve(__dirname, 'src', 'index.html'),
+    }),
+    new miniCss({
+      filename: 'style.css',
+    }),
+  ],
 };

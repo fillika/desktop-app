@@ -1,6 +1,12 @@
 import React from 'react';
-import './styles/index.scss';
+import styled from 'styled-components';
+
+const Wrapper = styled.div`
+  max-width: 60px;
+  min-width: 60px;
+  background-color: blueviolet;
+`;
 
 export const MainSidebar = () => {
-    return <div className="main-sidebar">main-sidebar</div>;
+  return <Wrapper>main-sidebar</Wrapper>;
 };
