@@ -5,18 +5,29 @@ import { SidebarIcon } from './sidebar-icon';
 
 const Wrapper = styled.div`
   padding-top: 3px;
-  max-width: 60px;
-  min-width: 60px;
-  background: linear-gradient(#441f22, #221521);
+  max-width: ${({ theme }) => theme.sizes.sideBar.width}px;
+  min-width: ${({ theme }) => theme.sizes.sideBar.width}px;
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+`;
+
+const OpacityOverlay = styled(Wrapper)`
+  background-image: ${({ theme }) => theme.colors.overlay};
+  opacity: 0.78;
 `;
 
 export const MainSidebar = () => {
   return (
-    <Wrapper>
-      <SidebarIcon />
-      <SidebarIcon />
-      <SidebarIcon />
-      <SidebarIcon />
-    </Wrapper>
+    <>
+      <OpacityOverlay />
+      <Wrapper>
+        <SidebarIcon />
+        <SidebarIcon />
+        <SidebarIcon />
+        <SidebarIcon />
+      </Wrapper>
+    </>
   );
 };

@@ -1,8 +1,9 @@
 import * as React from 'react';
-import styled, { createGlobalStyle } from 'styled-components';
+import styled, { createGlobalStyle, ThemeProvider } from 'styled-components';
 
 import { Desktop } from '@features/desktop';
 import { MainSidebar } from '@features/main-sidebar';
+import { theme } from '@src/theme';
 
 const GlobalStyle = createGlobalStyle`
   * {
@@ -13,17 +14,18 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 const Container = styled.div`
-  display: flex;
   width: 100%;
   height: 100vh;
 `;
 
 export const App: React.FC = () => {
   return (
-    <Container>
-      <GlobalStyle />
-      <MainSidebar />
-      <Desktop />
-    </Container>
+    <ThemeProvider theme={theme}>
+      <Container>
+        <GlobalStyle />
+        <MainSidebar />
+        <Desktop />
+      </Container>
+    </ThemeProvider>
   );
 };
